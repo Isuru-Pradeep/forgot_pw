@@ -6,7 +6,7 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  List<Map<String, dynamic>> _historyData = [
+  final List<Map<String, dynamic>> _historyData = [
     {
       'image':
           'https://images.pexels.com/photos/112811/pexels-photo-112811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
@@ -17,6 +17,16 @@ class _HistoryPageState extends State<HistoryPage> {
           'https://images.pexels.com/photos/271816/pexels-photo-271816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
       'palette': ['#3498DB', '#2ECC71', '#F1C40F', '#E67E22']
     },
+    {
+      'image':
+          'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'palette': ['#FF5733', '#C70039', '#900C3F', '#581845']
+    },
+    {
+      'image':
+          'https://images.pexels.com/photos/259962/pexels-photo-259962.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+      'palette': ['#3498DB', '#2ECC71', '#F1C40F', '#E67E22']
+    },
   ];
 
   void _showClearHistoryDialog() {
@@ -25,7 +35,8 @@ class _HistoryPageState extends State<HistoryPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Clear History'),
-          content: Text('Are you sure you want to clear the history?'),
+          content: Text(
+              'Are you sure, you want to clear previously generated color palettes with image?'),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -48,10 +59,12 @@ class _HistoryPageState extends State<HistoryPage> {
 
   void _clearHistory() {
     setState(() {
-      _historyData.clear(); // Clear the history data
+      _historyData.removeLast(); // Clear the history last data
     });
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('History Cleared')),
+      SnackBar(
+          content: Text(
+              'Previously generated color palettes and images history Cleared')),
     );
   }
 
@@ -76,12 +89,16 @@ class _HistoryPageState extends State<HistoryPage> {
                               Image.network(item['image']),
                               SizedBox(height: 10),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: item['palette'].map<Widget>((color) {
                                   return Container(
                                     width: 50,
                                     height: 50,
-                                    color: Color(int.parse(color.substring(1, 7), radix: 16) + 0xFF000000),
+                                    color: Color(int.parse(
+                                            color.substring(1, 7),
+                                            radix: 16) +
+                                        0xFF000000),
                                   );
                                 }).toList(),
                               ),
