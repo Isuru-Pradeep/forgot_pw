@@ -3,6 +3,9 @@ import 'forgot_password_page.dart';
 import 'history_page.dart';
 
 class HomePage extends StatelessWidget {
+  final String email =
+      'pradeepisuru31.com'; // Replace this with the actual email address you want to pass
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +28,8 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HistoryPage()),
+                  MaterialPageRoute(
+                      builder: (context) => HistoryPage(email: email)),
                 );
               },
               child: Text('History'),
